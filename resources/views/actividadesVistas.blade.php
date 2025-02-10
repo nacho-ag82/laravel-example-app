@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,37 @@
 </head>
 <body>
     <ul>
-        @forelse($usuarios as $usuario)
-            @if($loop->first)
-                <li>Primer usuario: {{ $usuario }}</li>
-            @elseif($loop->last)
-                <li>Último usuario: {{ $usuario }}</li>
-            @else
-                <li>{{ $usuario }}</li>
-            @endif
-        @empty
-            <li>No hay usuarios registrados</li>
-        @endforelse
+    @php
+    $nivel = 2; // Example level
+@endphp
+
+<h1>
+    @switch($nivel)
+        @case(1)
+            Usuario Básico
+            @break
+        @case(2)
+            Usuario Intermedio
+            @break
+        @case(3)
+            Usuario Avanzado
+            @break
+        @default
+            Nivel desconocido
+    @endswitch
+</h1>
+
+<ul>
+    @for ($i = 1; $i <= 5; $i++)
+        <li>Número: {{ $i }}</li>
+    @endfor
+</ul>
+
+@if($usuarios->isNotEmpty())
+    <p>Hay usuarios registrados.</p>
+@else
+    <p>No hay usuarios registrados.</p>
+@endif
     
     </ul>
 
