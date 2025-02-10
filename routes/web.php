@@ -1,0 +1,72 @@
+<?php
+
+use App\Http\Controllers\HolaController;
+use App\Http\Controllers\BlogController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\UserPruebaController;
+use App\Http\Controllers\ActividadesController;
+/*
+Route::get('/hola', [HolaController::class, 'index'])->name('hola.index');
+Route::get('/hola/{nombre}', [HolaController::class, 'show'])->name('hola.show');
+
+// Mostrar el formulario para crear un nuevo artículo
+Route::get('/blog/crear', [BlogController::class, 'create'])->name('blog.create');
+// Mostrar todos los artículos del blog
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+// Mostrar un artículo específico
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+*/
+// Ruta de inicio
+Route::get('/', function () {
+    echo "<p><a href='". route('contactos') . "'>Contactos 1</a></p>";
+    echo "<p><a href='". route('contactos') . "'>Contactos 2</a></p>";
+    echo "<p><a href='". route('contactos') . "'>Contactos 3</a></p>";
+    echo "<p><a href='". route('contactos') . "'>Contactos 4</a></p>";
+    echo "<p><a href='". route('contactos') . "'>Contactos 5</a></p>";
+})->name('contactos');
+
+Route::get('contactanos', function () {
+    return "Sección de contactos";
+})->name('contactos');
+
+Route::redirect('contactame', 'contactanos');
+
+Route::middleware(['first','second'])->group(function () {
+    Route::get('user/', function (): string{
+        // Usa los Middleware first & second
+        return "Hola";
+    });
+    Route::get('user/profile', function (): string {
+        // Usa los Middleware first & second
+        return "Adiós";
+    });
+    
+});
+
+/*Route::prefix('admin')->group(function () {
+    Route::get('users', function (): string {
+        // Usa los Middleware first & second
+        return "Usuarios admin";
+    });
+    Route::get('settings', function (): string {
+        // Usa los Middleware first & second
+        return "Settings admin";
+    });
+});*/
+
+Route::prefix('admin')->middleware('auth','isAdmin')->group(function(){
+    Route::get('dashboard', function (){
+        // Usa los Middleware first & second
+        return "Dashboard admin";
+    });
+});
+Route::get('/login', function (){
+    return "Pagina login";
+})->name('login');
+
+Route::get('/quienesSomos/{nombre?}', 
+[UserPruebaController::class,
+'quienesSomos']);
+
+Route::get('/actividades', [ActividadesController::class, 'actividadesVistas']);
