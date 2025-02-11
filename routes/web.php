@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\UserPruebaController;
 use App\Http\Controllers\ActividadesController;
+use App\Models\task;
 /*
 Route::get('/hola', [HolaController::class, 'index'])->name('hola.index');
 Route::get('/hola/{nombre}', [HolaController::class, 'show'])->name('hola.show');
@@ -19,12 +20,8 @@ Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 */
 // Ruta de inicio
 Route::get('/', function () {
-    echo "<p><a href='". route('contactos') . "'>Contactos 1</a></p>";
-    echo "<p><a href='". route('contactos') . "'>Contactos 2</a></p>";
-    echo "<p><a href='". route('contactos') . "'>Contactos 3</a></p>";
-    echo "<p><a href='". route('contactos') . "'>Contactos 4</a></p>";
-    echo "<p><a href='". route('contactos') . "'>Contactos 5</a></p>";
-})->name('contactos');
+    return view('welcome');
+});
 
 Route::get('contactanos', function () {
     return "Sección de contactos";
@@ -70,3 +67,8 @@ Route::get('/quienesSomos/{nombre?}',
 'quienesSomos']);
 
 Route::get('/actividades', [ActividadesController::class, 'actividadesVistas']);
+
+Route::get('/tasks', function () {
+    $tasks=task::take(10)->get();
+    dump($tasks);
+});
