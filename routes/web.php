@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\UserPruebaController;
 use App\Http\Controllers\ActividadesController;
-use App\Models\task;
+use App\Models\Task;
+use App\Http\Controllers\TaskController;
 /*
 Route::get('/hola', [HolaController::class, 'index'])->name('hola.index');
 Route::get('/hola/{nombre}', [HolaController::class, 'show'])->name('hola.show');
@@ -68,7 +69,15 @@ Route::get('/quienesSomos/{nombre?}',
 
 Route::get('/actividades', [ActividadesController::class, 'actividadesVistas']);
 
-Route::get('/tasks', function () {
-    $tasks=task::take(10)->get();
-    dump($tasks);
-});
+//Route::get('/tasks', function () {
+//    $tasks=task::take(10)->get();
+//    dump($tasks);
+//});
+//Route::view('/layout','prueba-layout');
+//Route::get('/pruebaVista', function () {
+//    return view('prueba-layout');
+//});
+
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+Route::get('tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('tasks', [TaskController::class, 'store'])->name('tasks.store');
