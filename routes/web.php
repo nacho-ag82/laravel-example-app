@@ -8,6 +8,7 @@ use App\Http\Controllers\UserPruebaController;
 use App\Http\Controllers\ActividadesController;
 use App\Models\Task;
 use App\Http\Controllers\TaskController;
+use App\View\Components\AppLayout;
 /*
 Route::get('/hola', [HolaController::class, 'index'])->name('hola.index');
 Route::get('/hola/{nombre}', [HolaController::class, 'show'])->name('hola.show');
@@ -79,5 +80,7 @@ Route::get('/actividades', [ActividadesController::class, 'actividadesVistas']);
 //});
 
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
-Route::get('tasks/create', [TaskController::class, 'create'])->name('tasks.create');
-Route::post('tasks', [TaskController::class, 'store'])->name('tasks.store');
+Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+Route::get('/tasks/{task}/edit', [TaskController::class,'edit'])->name(name:'tasks.edit');
+Route::put('/tasks/{task}',[TaskController::class,'update'])->name(name:'tasks.update');
