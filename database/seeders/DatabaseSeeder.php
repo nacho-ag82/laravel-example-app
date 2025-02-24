@@ -7,6 +7,13 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\TaskSeeder;
 use   App\Models\Task;
+use App\Models\Titulo;
+use App\Models\Torneo;
+use App\Models\Tenista;
+use Database\Seeders\TituloSeeder; // Ensure this class exists in the specified namespace
+use Database\Seeders\TorneoSeeder;
+use Database\Seeders\TenistaSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,7 +30,9 @@ class DatabaseSeeder extends Seeder
         ]);*/
 
         $this->call([
-            TaskSeeder::class,
+            TenistaSeeder::class,
+            TituloSeeder::class,
+            TorneoSeeder::class,
         ]);
     }
 }
