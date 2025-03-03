@@ -1,44 +1,28 @@
-/**
- * Class Tenista
- *
- * This class represents a tennis player and extends the Eloquent Model.
- * It includes the following properties and methods:
- *
- * @property array $fillable The attributes that are mass assignable.
- * @method \Illuminate\Database\Eloquent\Relations\HasMany titulos() Defines a one-to-many relationship with the Titulo model.
- *
- * @package App\Http\Controllers
- */
+<?php 
 namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Tenista;
 
-class Tenista extends Model
+class TenistaController extends Model
 {
-    protected $fillable = ['nombre', 'ciudad', 'superficie'];
 
-    public function titulos()
+/*
+    @return View
+*/
+    public function index(): View
     {
-        return $this->hasMany(Titulo::class);
+        $tenistas = Tenista::with(['nombre', 'ciudad','superficie'])->paginate(6); 
+        return view('tenistas.index', [
+            'tenistas' => $tenistas,
+            ]);
     }
 
-    /**
-     * Get the full name of the tennis player.
-     *
-     * @return string
-     */
-    public function getFullName()
-    {
-        return $this->nombre . ' from ' . $this->ciudad;
-    }
 
-    /**
-     * Get the preferred surface of the tennis player.
-     *
-     * @return string
-     */
-    public function getPreferredSurface()
+    public function delete(Tenista $tenista): RedirectResponse
     {
-        return $this->superficie;
+        $torneo->delete();
+        return redirect()->route('tenistas.index');
     }
+ 
 }

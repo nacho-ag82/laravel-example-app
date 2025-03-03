@@ -1,10 +1,10 @@
-/**
+<?php/**
  * Class TituloController
  * 
  * This controller handles the CRUD operations for the Titulos model.
  * It also provides a method to retrieve titles for a specific Tenista.
  */
-<?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -68,6 +68,12 @@ class TituloController extends Controller
     public function store(Request $request): RedirectResponse
     {
         Titulos::create($request->all());
+        return redirect()->route('titulos.index');
+    }
+    
+    public function delete(Torneo $torneo): RedirectResponse
+    {
+        $torneo->delete();
         return redirect()->route('titulos.index');
     }
 

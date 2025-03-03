@@ -21,7 +21,7 @@ class TaskController extends Controller
         //pasamos variables a las vistas con notación de array
         $tasks = Task::paginate(perPage: 5);
         return view('tasks.index', [
-            'tasks' => $tasks,
+            'tasks' => $tasks
         ]);
     }
 

@@ -1,8 +1,9 @@
-use Illuminate\Database\Eloquent\Model;
+
 
 <?php
-
 namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+
 
 // Definición del modelo Torneo
 class Torneo extends Model
@@ -11,7 +12,7 @@ class Torneo extends Model
     protected $fillable = ['nombre', 'ciudad', 'superficie'];
 
     // Relación uno a muchos con el modelo Titulo
-    public function titulos()
+    public function torneos()
     {
         return $this->hasMany(Titulo::class);
     }
